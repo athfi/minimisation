@@ -1,0 +1,6 @@
+<templateSet group="Zen CSS">
+  <template name="fl" value="float:$VAR0$;" description="float:...;" toReformat="true" toShortenFQNames="true">
+    <variable name="VAR0" expression="" defaultValue="&quot;left&quot;" alwaysStopAt="true" />
+    <context />
+  </template>
+</templateSet>

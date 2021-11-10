@@ -1,0 +1,8 @@
+<templateSet group="HTML/XML">
+  <template name="eco" value="&lt;?php echo isset($VAR$) &amp;&amp; !empty($VAR$) ? $VAR$ : ''; ?&gt;" description="echo php  in html" toReformat="false" toShortenFQNames="true">
+    <variable name="VAR" expression="" defaultValue="" alwaysStopAt="true" />
+    <context>
+      <option name="HTML" value="true" />
+    </context>
+  </template>
+</templateSet>

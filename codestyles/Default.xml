@@ -1,0 +1,31 @@
+<code_scheme name="Default" version="173">
+  <option name="LINE_SEPARATOR" value="&#10;" />
+  <option name="RIGHT_MARGIN" value="80" />
+  <option name="SOFT_MARGINS" value="80,100" />
+  <PHPCodeStyleSettings>
+    <option name="VARIABLE_NAMING_STYLE" value="CAMEL_CASE" />
+    <option name="SPACES_AROUND_VAR_WITHIN_BRACKETS" value="true" />
+    <option name="SPACE_AROUND_ASSIGNMENT_IN_DECLARE" value="true" />
+  </PHPCodeStyleSettings>
+  <codeStyleSettings language="HTML">
+    <indentOptions>
+      <option name="INDENT_SIZE" value="1" />
+      <option name="CONTINUATION_INDENT_SIZE" value="2" />
+    </indentOptions>
+  </codeStyleSettings>
+  <codeStyleSettings language="PHP">
+    <option name="RIGHT_MARGIN" value="80" />
+    <option name="SPACE_AROUND_UNARY_OPERATOR" value="true" />
+    <option name="SPACE_WITHIN_PARENTHESES" value="true" />
+    <option name="SPACE_WITHIN_METHOD_CALL_PARENTHESES" value="true" />
+    <option name="SPACE_WITHIN_METHOD_PARENTHESES" value="true" />
+    <option name="SPACE_WITHIN_IF_PARENTHESES" value="true" />
+    <option name="SPACE_WITHIN_WHILE_PARENTHESES" value="true" />
+    <option name="SPACE_WITHIN_FOR_PARENTHESES" value="true" />
+    <option name="SPACE_WITHIN_SWITCH_PARENTHESES" value="true" />
+    <option name="SPACE_WITHIN_BRACKETS" value="true" />
+    <option name="SPACE_WITHIN_ARRAY_INITIALIZER_BRACES" value="true" />
+    <option name="WRAP_ON_TYPING" value="0" />
+    <option name="SOFT_MARGINS" value="80" />
+  </codeStyleSettings>
+</code_scheme>

@@ -1,0 +1,17 @@
+<application>
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="8682ec3f-bbd6-4c06-a403-44ffcdc057bf" name="a" url="http://localhost/eci/public">
+        <fileTransfer port="0" accessType="LOCAL" />
+      </webServer>
+      <webServer id="32c627d8-9833-4ddc-80df-29fae6c60d75" name="maps2" url="https://stroke.nottingham.ac.uk/maps-2/">
+        <fileTransfer host="uilwwweb02.nottingham.ac.uk" port="22" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</application>

@@ -1,0 +1,44 @@
+<application>
+  <component name="ProjectManager">
+    <defaultProject>
+      <component name="ProjectInspectionProfilesVisibleTreeState">
+        <entry key="Project Default">
+          <profile-state>
+            <expanded-state>
+              <State />
+              <State>
+                <id>Bitwise operation issuesJavaScript</id>
+              </State>
+              <State>
+                <id>Control flow issuesJavaScript</id>
+              </State>
+              <State>
+                <id>Cucumber</id>
+              </State>
+              <State>
+                <id>GeneralJavaScript</id>
+              </State>
+              <State>
+                <id>JavaScript</id>
+              </State>
+              <State>
+                <id>Potentially confusing code constructsJavaScript</id>
+              </State>
+              <State>
+                <id>SQL</id>
+              </State>
+            </expanded-state>
+            <selected-state>
+              <State>
+                <id>Angular</id>
+              </State>
+            </selected-state>
+          </profile-state>
+        </entry>
+      </component>
+      <component name="PropertiesComponent">
+        <property name="settings.editor.selected.configurable" value="preferences.sourceCode.PHP" />
+      </component>
+    </defaultProject>
+  </component>
+</application>
