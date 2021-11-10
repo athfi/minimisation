@@ -1,0 +1,9 @@
+<application>
+  <component name="SshConfigs">
+    <configs>
+      <sshConfig authType="PASSWORD" connectionConfig="{&quot;serverAliveInterval&quot;:300}" host="uilwwweb02.nottingham.ac.uk" id="e597a6ae-84d0-404e-9d07-12a9a321cb2e" port="22" customName="maps2" nameFormat="CUSTOM" username="nszmaps2">
+        <option name="customName" value="maps2" />
+      </sshConfig>
+    </configs>
+  </component>
+</application>
