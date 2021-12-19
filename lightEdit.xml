@@ -1,13 +1,5 @@
 <application>
   <component name="LightEdit">
-    <option name="sessionFiles">
-      <list>
-        <option value="file://D:/Download/test.html" />
-        <option value="file://D:/Download/orari.html" />
-        <option value="file://$USER_HOME$/AppData/Local/Temp/Temp1_redcap-api-examples.zip/php/config.php" />
-        <option value="file://$USER_HOME$/AppData/Local/Temp/Temp1_redcap-api-examples.zip/php/export_instrument_event_maps.php" />
-      </list>
-    </option>
     <option name="frameInfo">
       <frame x="260" y="40" width="1400" height="1000" />
     </option>
