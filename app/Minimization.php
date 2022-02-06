@@ -1,9 +1,12 @@
 <?php
+// code is inspired by MinimPy2 by Saghaei, M. and Saghaei, S. (http://minimpy.sourceforge.net/)
+// The implementaion is quite different as we get the data records form REDCap
+// and we use mini table to track the current minimisation.
+// The code inspired from MinimPy2 is how to create freq table
 
 namespace App;
 
 use Exception;
-use Hamcrest\Thingy;
 use Illuminate\Support\Collection;
 
 class Minimization
@@ -22,6 +25,8 @@ class Minimization
         $this->distance_method = $setting['distance_method'];
         $this->setMiniTable($minim_table);
         $this->setFreqTable();
+        // TODO get form setting
+        $this->redcap_id_field = 'record_id';
     }
 
     public function getGroups()
@@ -45,17 +50,19 @@ class Minimization
     }
 
 
-    public function enroll( $record_id, $records )
+    public function enroll( $new_participant_id, $records )
     {
         $new_participant = $records
-            ->where( 'record_id', '==', $record_id )
+            ->where( $this->redcap_id_field, '==', $new_participant_id )
             ->first();
 
         throw_if( $new_participant[ 'rand_group' ] != '',
             new \Exception( 'Participant already randomised.' ) );
 
-        $this->buildMiniTable( $records->groupBy( [ 'rand_group', 'record_id' ] ) );
+        // build mini table using redcap records
+        $this->buildMiniTable( $records->groupBy( [ 'rand_group', $this->redcap_id_field ] ) );
 
+        //allocate new participant
         $allocation = $this->getGroup( $new_participant );
 
         return $allocation;
@@ -71,7 +78,8 @@ class Minimization
                 foreach ($records[$group] as $id => $data){
                     $data = $data->first();
                     foreach ($this->factors as $factor=>$level){
-                        throw_if(! isset($data[$factor]), new Exception('Error'));
+                        throw_if(! isset($data[$factor]),
+                            new Exception("Error, Not known factor received:'$factor'."));
                         $temp_mini_table[$group][$id][$factor]=$data[$factor];
                     }
                 }
@@ -111,7 +119,7 @@ class Minimization
         }
 
         $min_score = min($imbalance_score);
-        //groups that have value = min imbalance
+        // get groups that have value = min imbalance
         $min_list = [];
         foreach ($imbalance_score as $group => $value){
             if ($value == $min_score){
@@ -130,17 +138,18 @@ class Minimization
         return [$new_group, $imbalance_score];
     }
 
+    // create frequency table
     private function setFreqTable()
     {
         $freq_table = $this->createFreqTable();
-
-        if ( count( $this->mini_table ) > 0 ) {
+        //if mini table is not empty, update the frequency table
+        if ( count( $this->mini_table ) > 0 )
+        {
             $this->freq_table = $this->buildFreqTable($this->mini_table, $freq_table );
         }
-
     }
 
-
+    // update frequency using mini table
     private function buildFreqTable( array $mini_table = NULL, $freq_table = NULL )
     {
         $mini_table = $mini_table ?? $this->mini_table;
@@ -153,8 +162,6 @@ class Minimization
 
             return $freq_table;
     }
-
-
 
 
     private function getLevel( string $factor, $value )
