@@ -1,0 +1,39 @@
+<?php
+
+namespace App\Providers;
+
+use Illuminate\Support\Collection;
+use Illuminate\Support\ServiceProvider;
+
+class AppServiceProvider extends ServiceProvider
+{
+    /**
+     * Register any application services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        //
+    }
+
+    /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        // source: https://gist.github.com/brunogaspar/154fb2f99a7f83003ef35fd4b5655935
+        // 29 Nov 2021
+        Collection::macro('recursive', function () {
+            return $this->map(function ($value) {
+                if (is_array($value) || is_object($value)) {
+                    return collect($value)->recursive();
+                }
+
+                return $value;
+            });
+        });
+    }
+}
