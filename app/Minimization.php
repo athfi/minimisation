@@ -1,8 +1,8 @@
 <?php
 // code is inspired by MinimPy2 by Saghaei, M. and Saghaei, S. (http://minimpy.sourceforge.net/)
-// The implementaion is quite different as we get the data records form REDCap
-// and we use mini table to track the current minimisation.
-// The code inspired from MinimPy2 is how to create freq table
+// The part of code that inspired from MinimPy2 is the process of minimisation and the use of freq table
+// Others code implementation is quite different as we process REDCap raw data
+// rather than data that ready to use and this app also use mini table to track the current minimisation.
 
 namespace App;
 
@@ -25,7 +25,8 @@ class Minimization
         $this->distance_method = $setting['distance_method'];
         $this->setMiniTable($minim_table);
         $this->setFreqTable();
-        // TODO get form setting
+
+        // TODO get from setting
         $this->redcap_id_field = 'record_id';
     }
 

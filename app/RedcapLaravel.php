@@ -15,30 +15,36 @@ class RedcapLaravel extends RedCapProject
         $caCertificateFile = null,
         $errorHandler = null,
         $connection = null
-    ){
+    )
+    {
         $apiUrl = $project->url;
         $superToken = $project->token;
-        parent::__construct($apiUrl, $superToken, $sslVerify, $caCertificateFile, $errorHandler, $connection);
+        parent::__construct( $apiUrl, $superToken, $sslVerify, $caCertificateFile, $errorHandler, $connection );
 
         $this->recordId = $this->getRecordID();
-
     }
 
     public function getMetadata()
     {
-        $metadata = collect( $this->exportMetadata() )
-            ->mapWithKeys( function ( $item ) {
-                $field_with_choices = [ 'checkbox', 'radio', 'dropdown' ];
-                // convert the choices to array
-                if ( in_array( $item[ 'field_type' ], $field_with_choices )
-                    && $item[ 'select_choices_or_calculations' ] ) {
-                    $item[ 'select_choices_or_calculations' ] =
-                        $this->splitChoices( $item[ 'select_choices_or_calculations' ] );
-                }
+        return collect( $this->exportMetadata() )
+            ->mapWithKeys( $this->MapWithFieldName() );
+    }
 
-                return [ $item[ 'field_name' ] => $item ];
-            } );
-        return ( $metadata );
+    public function getRecords()
+    {
+        return collect( $this->exportRecords() );
+    }
+
+    public function getRecordID()
+    {
+        return array_key_first( $this->getMetadata()->toArray() );
+    }
+
+    public function getRecord( string $record_id = null )
+    {
+        return collect( $this->exportRecords( 'php', 'flat', [ $record_id ] ) )
+            ->mapWithKeys( $this->SplitMultiChoices() )
+            ->first();
     }
 
     private function splitChoices( $choices )
@@ -51,23 +57,6 @@ class RedcapLaravel extends RedCapProject
             $list_choice[ $key ] = $value;
         }
         return $list_choice;
-    }
-
-    public function getRecords(): \Illuminate\Support\Collection
-    {
-        return collect( $this->exportRecords() );
-    }
-
-    public function getRecordID()
-    {
-        return array_key_first( $this->getMetadata()->toArray());
-    }
-
-    public function getRecord( string $record_id = null )
-    {
-        return collect( $this->exportRecords( 'php', 'flat', [$record_id] ) )
-            ->mapWithKeys( $this->SplitMultiChoices() )
-            ->first();
     }
 
     /**
@@ -88,5 +77,23 @@ class RedcapLaravel extends RedCapProject
             }
             return [ $item[ $this->recordId ] => $data ];
         };
+    }
+
+    /**
+     * @return \Closure
+     */
+    private function MapWithFieldName(): \Closure
+    {
+        $mapWithFieldName = function ( $item ) {
+            $field_with_choices = [ 'checkbox', 'radio', 'dropdown' ];
+            // convert the choices to array
+            if ( in_array( $item[ 'field_type' ], $field_with_choices )
+                && $item[ 'select_choices_or_calculations' ] ) {
+                $item[ 'select_choices_or_calculations' ] =
+                    $this->splitChoices( $item[ 'select_choices_or_calculations' ] );
+            }
+            return [ $item[ 'field_name' ] => $item ];
+        };
+        return $mapWithFieldName;
     }
 }
