@@ -14,3 +14,7 @@ yarn-error.log
 /.idea
 /.vscode
 *xml
+/codestyles
+/inspection
+/templates
+/_windows
